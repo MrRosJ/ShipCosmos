@@ -5,6 +5,9 @@ using UnityEngine;
 public class BoughtShip : MonoBehaviour {
 
     public GameObject[] PriceShips;
+    public GameObject[] Selected;
+    public GameObject[] Select;
+
     private ShipControl ship;
     private int CurrentCoin;
     public GameObject Ship_Active_1;
@@ -23,9 +26,7 @@ public class BoughtShip : MonoBehaviour {
     private bool Active_Ship_2;
     private bool Active_Ship_3;
 
-    private bool Select_ship_1;
-    private bool Select_ship_2;
-    private bool Select_ship_3;
+
 
     public GameObject[] SelectedT;
 
@@ -50,11 +51,11 @@ public class BoughtShip : MonoBehaviour {
         if (Active_Ship_Pref_3 == 1)
             Active_Ship_3 = true;
 
+
     }
 
     private void Update()
     {
-        Select();
         if (Active_Ship_Pref_1 == 1)
         {
             Ship_Active_1.SetActive(true);
@@ -90,6 +91,9 @@ public class BoughtShip : MonoBehaviour {
             PlayerPrefs.SetInt("coin", CurrentCoin);
             PlayerPrefs.SetInt("ship_1", 1);
             Active_Ship_1 = true;
+
+
+
         }
         else
             ErrorMenu.SetActive(true);
@@ -110,6 +114,7 @@ public class BoughtShip : MonoBehaviour {
             PlayerPrefs.SetInt("coin", CurrentCoin);
             PlayerPrefs.SetInt("ship_2", 1);
             Active_Ship_2 = true;
+
         }
         else
             ErrorMenu.SetActive(true);
@@ -130,6 +135,7 @@ public class BoughtShip : MonoBehaviour {
             PlayerPrefs.SetInt("coin", CurrentCoin);
             PlayerPrefs.SetInt("ship_3", 1);
             Active_Ship_3 = true;
+
         }
         else
             ErrorMenu.SetActive(true);
@@ -141,8 +147,6 @@ public class BoughtShip : MonoBehaviour {
             ErrorMenu.SetActive(false);
     }
 
-    private void Select()
-    {
-        
-    }
+
+    
 }

@@ -84,11 +84,13 @@
     <Compile Include="Assets\Scripts\Enemy\Mine.cs" />
     <Compile Include="Assets\Scripts\Enemy\SimpleEnemy.cs" />
     <Compile Include="Assets\Scripts\GenerateEnemy.cs" />
-    <Compile Include="Assets\Scripts\GenerateStars.cs" />
     <Compile Include="Assets\Scripts\Joystick.cs" />
     <Compile Include="Assets\Scripts\Menu\BoughtShip.cs" />
     <Compile Include="Assets\Scripts\Menu\GameMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu\GenStars.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Menu\MovStars.cs" />
+    <Compile Include="Assets\Scripts\Menu\SelectShip.cs" />
     <Compile Include="Assets\Scripts\MoveObject.cs" />
     <Compile Include="Assets\Scripts\MoveStars.cs" />
     <Compile Include="Assets\Scripts\PlayerPrefs.cs" />
