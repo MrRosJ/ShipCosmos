@@ -20,7 +20,21 @@ public class Rocket : MonoBehaviour {
             sm.PlaySound(0);
         }
 
+        if (coll.gameObject.CompareTag("boss"))
+        {
+            coll.gameObject.GetComponent<Boss>().Damage(5);
+            Destroy(gameObject);
+            sm.PlaySound(0);
+        }
+
         if (coll.gameObject.CompareTag("enemyBullet"))
+        {
+            Destroy(coll.gameObject);
+            Destroy(gameObject);
+            sm.PlaySound(0);
+        }
+
+        if (coll.gameObject.CompareTag("bossBulletOrRocket"))
         {
             Destroy(coll.gameObject);
             Destroy(gameObject);

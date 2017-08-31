@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour {
 
+    private GlobalScript global;
+
     private bool Pause = false;
     private bool sound = false;
     public GameObject PausePanel;
@@ -22,12 +24,18 @@ public class GameMenu : MonoBehaviour {
     public Image backgroundImage;
     private ShipControl ship;
     public Text SountT;
+    public Text kill_enemy;
 
     private void Start()
     {
         Time.timeScale = 1f;
         ship = GameObject.Find("ShipPlayer").GetComponent<ShipControl>();
-        
+        global = GameObject.Find("Global").GetComponent<GlobalScript>();
+    }
+
+    private void Update()
+    {
+        kill_enemy.text = global.kill_enemys.ToString();
     }
 
     public void PauseM()

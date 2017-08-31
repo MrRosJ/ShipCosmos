@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GenerateEnemy : MonoBehaviour
 {
+    private GlobalScript global;
 
     public GameObject[] Enemys;
     public float minDelay;
@@ -15,8 +16,10 @@ public class GenerateEnemy : MonoBehaviour
 
     void Start()
     {
+        global = GameObject.Find("Global").GetComponent<GlobalScript>();
         StartCoroutine(Spawn());
     }
+
 
     void Repeat()
     {
@@ -25,17 +28,19 @@ public class GenerateEnemy : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(Random.Range(minDelay, maxDelay));
-        Vector2 pos = new Vector2(transform.position.x, Random.Range(minY, maxY));
-        GameObject e = Instantiate(Enemys[Random.Range(0, Enemys.Length)], pos, Quaternion.identity) as GameObject;
-        int r = Random.Range(0, 100);
-        Vector2 BonusPos = new Vector2(transform.position.x, Random.Range(minY, maxY));
-
-        if (r <= 30)
+        if (!global.isGenerateEnemy)
         {
-            GameObject q = Instantiate(bonus, BonusPos, Quaternion.identity) as GameObject;
+            yield return new WaitForSeconds(Random.Range(minDelay, maxDelay));
+            Vector2 pos = new Vector2(transform.position.x, Random.Range(minY, maxY));
+            GameObject e = Instantiate(Enemys[Random.Range(0, Enemys.Length)], pos, Quaternion.identity) as GameObject;
+            int r = Random.Range(0, 100);
+            Vector2 BonusPos = new Vector2(transform.position.x, Random.Range(minY, maxY));
 
+            if (r <= 30)
+            {
+                GameObject q = Instantiate(bonus, BonusPos, Quaternion.identity) as GameObject;
+            }
+            Repeat();
         }
-        Repeat();
     }
 }

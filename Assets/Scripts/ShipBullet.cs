@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShipBullet : MonoBehaviour {
 
-    public SoundManager sm;
+    private SoundManager sm;
 
     private void Start()
     {

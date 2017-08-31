@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SimpleEnemy : MonoBehaviour {
 
-    public int Life_points;
+    private  Life_points lf;
     public GameObject bullet;
     public float delay;
 
-    public Transform shootPoint;
+    public Transform[] shootPoint;
 
     private ShipControl Ship;
+    private GlobalScript global;
 
     public bool isDead = false;
 
@@ -18,11 +19,17 @@ public class SimpleEnemy : MonoBehaviour {
 
     public GameObject Coin;
 
+    private int Life_point;
+
     void Start()
     {
+        lf = GameObject.Find("Global").GetComponent<Life_points>();
+
+        Life_point = lf.Life_points_enemy;
         InvokeRepeating("Shoot", 2, delay);
 
         Ship = GameObject.Find("ShipPlayer").GetComponent<ShipControl>();
+        global = GameObject.Find("Global").GetComponent<GlobalScript>();
 
         if(gameObject == GameObject.FindWithTag("enemyBullet"))
         {
@@ -35,7 +42,7 @@ public class SimpleEnemy : MonoBehaviour {
 
     void Update()   
     {
-        if (Life_points == 0 && !isDead)
+        if (Life_point == 0 && !isDead)
             Boom();
     }
 
@@ -46,6 +53,7 @@ public class SimpleEnemy : MonoBehaviour {
         Destroy(gameObject);
         SpawnCoin();
         Ship.AddExp(5);
+        global.KillEnemy();
     }
 
     void SpawnCoin()
@@ -55,15 +63,18 @@ public class SimpleEnemy : MonoBehaviour {
 
     void Shoot()
     {
-        GameObject b = Instantiate(bullet, shootPoint.position, Quaternion.identity) as GameObject;
+        for (int i = 0; i < shootPoint.Length; i++)
+        {
+            GameObject b = Instantiate(bullet, shootPoint[i].transform.position, Quaternion.identity) as GameObject;
+        }
     }
 
 
     public void Damage(int dmg)
     {
-        Life_points -= dmg;
-        if (Life_points < 0)
-            Life_points = 0;
+        Life_point -= dmg;
+        if (Life_point < 0)
+            Life_point = 0;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
