@@ -17,6 +17,7 @@ public class GameMenu : MonoBehaviour {
     public GameObject PauseBtm1;
     public GameObject PauseBtm2;
     public GameObject LightPlay;
+    public GameObject DebugInfoGame;
 
     public Sprite PauseP;
     public Sprite PlayP;
@@ -36,6 +37,11 @@ public class GameMenu : MonoBehaviour {
     private void Update()
     {
         kill_enemy.text = global.kill_enemys.ToString();
+
+        if (PlayerPrefs.GetInt("debugCode", 0) == 1)
+            DebugInfoGame.SetActive(true);
+        else
+            DebugInfoGame.SetActive(false);
     }
 
     public void PauseM()

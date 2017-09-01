@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\MainScripts\GlobalScript.cs" />
     <Compile Include="Assets\Scripts\MainScripts\Life_points.cs" />
     <Compile Include="Assets\Scripts\Menu\BoughtShip.cs" />
+    <Compile Include="Assets\Scripts\Menu\Console.cs" />
     <Compile Include="Assets\Scripts\Menu\GameMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\GenStars.cs" />
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />

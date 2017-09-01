@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 
+    private Console console;
+
     public Text CoinText;
     public Text ExperienceText;
     private int CountCoin;
@@ -20,13 +22,28 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject Error;
 
+    public GameObject ConsolePanel;
+    public GameObject QuitPanel;
+    public GameObject input;
+    public GameObject On;
+    public GameObject Off;
+    public GameObject Button;
+    public GameObject DebugInfo;
+    public Camera camera;
+
+    public Transform direction;
+
+    public string DebugCode;
+
     private void Start()
     {
         Time.timeScale = 1f;
         StartM = GameObject.Find("StartImage");
         ExitM = GameObject.Find("ExitImage");
         ShopM = GameObject.Find("ShopImage");
-           
+
+
+        console = GameObject.Find("Console").GetComponent<Console>();
     }
 
     private void Update()
@@ -35,6 +52,17 @@ public class MainMenu : MonoBehaviour {
         ExperienceCount = PlayerPrefs.GetInt("experience");
         CoinText.text = CountCoin.ToString();
         ExperienceText.text = ExperienceCount.ToString();
+        if(PlayerPrefs.GetInt("debugCode", 0) == 1)
+        {
+            QuitPanel.SetActive(true);
+            input.SetActive(false);
+            On.SetActive(true);
+            Off.SetActive(false);
+            ConsolePanel.SetActive(false);
+            DebugInfo.SetActive(true);
+        }
+
+
     }
 
     public void StartGame()
@@ -46,11 +74,15 @@ public class MainMenu : MonoBehaviour {
 
     public void Shop()
     {
+
+        
         StartM.SetActive(false);
         ExitM.SetActive(false);
         ShopM.SetActive(false);
         Back.SetActive(true);
         ShopPanel.SetActive(true);
+        
+    
         return;
     }
 
@@ -70,5 +102,27 @@ public class MainMenu : MonoBehaviour {
         Error.SetActive(false);
 
         return;
+    }
+
+    public void EnterConsole()
+    {
+        ConsolePanel.SetActive(false);
+        input.SetActive(true);
+        GameObject.Find("Input").GetComponent<InputField>().text = "";
+    }
+
+    public void ButtonConsole()
+    {
+        console.SwitchCode();
+    }
+
+    public void QuitConsole()
+    {
+        ConsolePanel.SetActive(true);
+        On.SetActive(false);
+        Off.SetActive(true);
+        QuitPanel.SetActive(false);
+        PlayerPrefs.SetInt("debugCode", 0);
+        DebugInfo.SetActive(false);
     }
 }

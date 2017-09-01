@@ -5,19 +5,21 @@ using UnityEngine;
 public class Boss : MonoBehaviour {
 
     private Life_points lf;
+    private GlobalScript global;
     public GameObject bullet;
     public float delay;
 
     public Transform[] shootPoint;
 
     private ShipControl Ship;
-    private GlobalScript global;
 
     public bool isDead = false;
 
     private SoundManager sm;
 
     public int Life_point;
+
+    public bool isActive = false;
 
     void Start()
     {
@@ -42,16 +44,23 @@ public class Boss : MonoBehaviour {
     {
         if (Life_point == 0 && !isDead)
             Boom();
+
     }
 
     void Boom()
     {
+        global.BossIsDead(true);
         isDead = true;
         sm.PlaySound(0);
-        //Destroy(gameObject);
+        Destroy(gameObject);
         Ship.AddExp(5);
         global.KillEnemy();
+        global.isActive = true;
+        global.isGenerateEnemy = true;
     }
+
+    
+
 
 
     void Shoot()
