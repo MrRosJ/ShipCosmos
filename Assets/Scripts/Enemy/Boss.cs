@@ -8,19 +8,22 @@ public class Boss : MonoBehaviour {
     private GlobalScript global;
     public GameObject bullet;
     public float delay;
-
     public Transform[] shootPoint;
-
     private ShipControl Ship;
-
     public bool isDead = false;
-
     private SoundManager sm;
-
     public int Life_point;
-
     public bool isActive = false;
 
+    private GenerateBoss generate;
+    private GenerateEnemy generateE;
+
+    private Animation anim;
+
+    public bool isMovingBoss = false;
+
+    private Vector2 move;
+    public float Speed;
     void Start()
     {
         lf = GameObject.Find("Global").GetComponent<Life_points>();
@@ -36,8 +39,11 @@ public class Boss : MonoBehaviour {
             if (gameObject.transform.position.x < -13)
                 Destroy(gameObject);
         }
-
+        generate = GameObject.Find("GenerateBoss").GetComponent<GenerateBoss>();
+        generateE = GameObject.Find("GeneratorEnemy").GetComponent<GenerateEnemy>();
         sm = GameObject.Find("PlayZone").GetComponent<SoundManager>();
+        anim = GetComponent<Animation>();
+        move = new Vector2(transform.position.x, Ship.transform.position.y);
     }
 
     void Update()
@@ -45,18 +51,26 @@ public class Boss : MonoBehaviour {
         if (Life_point == 0 && !isDead)
             Boom();
 
+        if (!anim.IsPlaying("BossAnimation") && !isMovingBoss)
+            isMovingBoss = true;
+
+
+        if (isMovingBoss)
+            transform.position = Vector3.MoveTowards(transform.position, move, Speed * Time.deltaTime);
     }
 
     void Boom()
     {
-        global.BossIsDead(true);
         isDead = true;
         sm.PlaySound(0);
         Destroy(gameObject);
         Ship.AddExp(5);
-        global.KillEnemy();
-        global.isActive = true;
+        global.kill_enemys++;
+        global.isActive = false;
         global.isGenerateEnemy = true;
+        generate.BossPanel.SetActive(false);
+        global.isGenerateEnemy = false;
+        generateE.Repeat();
     }
 
     

@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ActivateConsole.cs" />
     <Compile Include="Assets\Scripts\Bonus\Bonus.cs" />
     <Compile Include="Assets\Scripts\Bonus\BonusLife.cs" />
     <Compile Include="Assets\Scripts\Bonus\BonusRocket.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Assets\Scripts\Menu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\MovStars.cs" />
     <Compile Include="Assets\Scripts\Menu\SelectShip.cs" />
+    <Compile Include="Assets\Scripts\MoveCamera.cs" />
     <Compile Include="Assets\Scripts\MoveObject.cs" />
     <Compile Include="Assets\Scripts\MoveStars.cs" />
     <Compile Include="Assets\Scripts\PlayerPrefs.cs" />

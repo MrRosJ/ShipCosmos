@@ -8,9 +8,6 @@ public class Console : MonoBehaviour {
     public string DebugCode;
     private MainMenu menu;
     private GlobalScript global;
-
-
-    public int DebugCodeBool;
     public string input;
 
 
@@ -18,7 +15,6 @@ public class Console : MonoBehaviour {
     {
         menu = GameObject.Find("Canvas").GetComponent<MainMenu>();
         global = GameObject.Find("Global").GetComponent<GlobalScript>();
-        DebugCodeBool = PlayerPrefs.GetInt("debugCode", 0);
     }
 
     private void Update()
@@ -29,15 +25,18 @@ public class Console : MonoBehaviour {
 
     public void SwitchCode()
     {
-        PlayerPrefs.SetInt("debugCode", 1);
         switch (input)
         {
             case "1":
+                menu.DebugInfo.SetActive(true);
                 menu.QuitPanel.SetActive(true);
                 menu.input.SetActive(false);
-                menu.On.SetActive(true);
-                menu.Off.SetActive(false);
+                PlayerPrefs.SetInt("debugCode", 1);
                 break;
         }
+    }
+    void Error()
+    {
+
     }
 }

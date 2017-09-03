@@ -15,16 +15,17 @@ public class MoveObject : MonoBehaviour {
     private ShipControl ship;
 
     public float speed;
-
+    private GameObject destroy;
     private void Start()
     {
         ship = GameObject.Find("ShipPlayer").GetComponent<ShipControl>();
+        destroy = GameObject.Find("Destroy");
     }
     void Update () {
 
         speed = Random.Range(MinSpeed,MaxSpeed);
         gameObject.transform.Translate(speed * dir * Time.deltaTime);
-        if (gameObject.transform.position.x < ship.transform.position.x - 25)
+        if (gameObject.transform.position.x < destroy.transform.position.x - 10)
             Destroy(gameObject);
     }
 

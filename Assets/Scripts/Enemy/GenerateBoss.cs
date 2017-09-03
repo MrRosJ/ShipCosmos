@@ -14,7 +14,7 @@ public class GenerateBoss : MonoBehaviour {
 
     public GameObject BossPanel;
 
-    private bool isActive;
+    public bool isActive = false;
     private int CountBosses = 0;
 
     private void Start()
@@ -27,15 +27,14 @@ public class GenerateBoss : MonoBehaviour {
 
     private void Update()
     {
-            if (global.isActive)
-            {
-            if (CountBosses < 1)
-            {
-                GameObject b = Instantiate(boss, pos, Quaternion.identity) as GameObject;
-                CountBosses++;
-            }
-
-                BossPanel.SetActive(true);
-            }
+        if (global.kill_enemys % global.CallBoss == 0 && global.kill_enemys != 0  && !isActive)
+        {
+            
+            GameObject b = Instantiate(boss, pos, Quaternion.identity) as GameObject;
+            CountBosses++;
+            isActive = true;
+            BossPanel.SetActive(true);
+            global.isGenerateEnemy = true;
+        }
     }
 }

@@ -1,48 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GlobalScript : MonoBehaviour {
 
     private Boss boss;
     private GenerateBoss generate;
+    private ActivateConsole active;
 
     public int kill_enemys = 0;
     public bool isGenerateEnemy = false;
-    public bool isActive;
+    public bool isActive = false;
     public bool isActiveConsole = false;
+    public bool GlobalisActive = false;
 
-    public bool BossDead = false;
+    public int CallBoss;
 
     private void Start()
     {
-        generate = GameObject.Find("GenerateBoss").GetComponent<GenerateBoss>();
-    }
-
-    public void BossIsDead(bool dead)
-    {
-        BossDead = true;
+        if(SceneManager.GetSceneByName("Game").ToString() == "Game")
+            generate = GameObject.Find("GenerateBoss").GetComponent<GenerateBoss>();
+        
     }
 
     private void Update()
     {
-        if (BossDead && isActive)
-        {
-            isGenerateEnemy = true;
-            isActive = false;
-            kill_enemys++;
-            generate.BossPanel.SetActive(false);
-        }
+        
+
+        if(GameObject.Find("Earth"))
+            active = GameObject.Find("Earth").GetComponent<ActivateConsole>();
     }
 
     public void KillEnemy()
     {
         kill_enemys++;
-        if (kill_enemys % 10 == 0 && kill_enemys != 0 && !isActive)
-        {
-            isGenerateEnemy = false;
-            isActive = true;
-        }
     }
 
 }

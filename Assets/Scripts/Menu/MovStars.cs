@@ -8,17 +8,18 @@ public class MovStars : MonoBehaviour {
 
     public Vector2 dir;
 
-    private GameObject ship;
+    private GameObject gm;
+
 
     private void Start()
     {
-        ship = GameObject.Find("ShipPlayer");
+        gm = GameObject.Find("Destroy");
     }
 
     private void Update()
     {
         transform.Translate(dir * Time.deltaTime * Speed);
-        if (transform.position.x < ship.transform.position.x - 12)
+        if (transform.position.x < gm.transform.position.x - 12)
             Destroy(gameObject);
     }
 }

@@ -38,7 +38,7 @@ public class GameMenu : MonoBehaviour {
     {
         kill_enemy.text = global.kill_enemys.ToString();
 
-        if (PlayerPrefs.GetInt("debugCode", 0) == 1)
+        if (PlayerPrefs.GetInt("debugCode") == 1)
             DebugInfoGame.SetActive(true);
         else
             DebugInfoGame.SetActive(false);

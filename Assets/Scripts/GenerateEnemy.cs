@@ -14,15 +14,17 @@ public class GenerateEnemy : MonoBehaviour
 
     public float minY, maxY;
 
+    private int cor = 0;
+
     void Start()
     {
         global = GameObject.Find("Global").GetComponent<GlobalScript>();
         StartCoroutine(Spawn());
     }
 
-
-    void Repeat()
+    public void Repeat()
     {
+        
         StartCoroutine(Spawn());
     }
 
@@ -41,6 +43,7 @@ public class GenerateEnemy : MonoBehaviour
                 GameObject q = Instantiate(bonus, BonusPos, Quaternion.identity) as GameObject;
             }
             Repeat();
+            cor = 2;
         }
     }
 }

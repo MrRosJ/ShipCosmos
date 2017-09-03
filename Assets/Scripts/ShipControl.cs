@@ -53,6 +53,8 @@ public class ShipControl : MonoBehaviour {
 
     public Text AllExperience;
 
+    private Animator anim;
+
     void Start()
     {
         isReadyToShoot = true;
@@ -71,6 +73,7 @@ public class ShipControl : MonoBehaviour {
         LaserBrm = GameObject.Find("Shoot");
         InfoPanel = GameObject.Find("Info");
         ExpPanel = GameObject.Find("Exp");
+        anim = GetComponent<Animator>();
     }
 
 	void Update(){
@@ -88,18 +91,21 @@ public class ShipControl : MonoBehaviour {
 
         LevelUp(LevelInPlayerPrefs);
 
-        var dist = (transform.position - Camera.main.transform.position).z;
+        
 
-        var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x + 1;
+            var dist = (transform.position - Camera.main.transform.position).z;
 
-        var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x - 1;
+            var leftBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).x + 1;
 
-        var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y + 1.5f;
+            var rightBorder = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x - 1;
 
-        var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y - 1.5f;
+            var topBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, dist)).y + 1.5f;
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftBorder, rightBorder), Mathf.Clamp(transform.position.y, topBorder, bottomBorder ), transform.position.z);
+            var bottomBorder = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y - 1.5f;
 
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, leftBorder, rightBorder), Mathf.Clamp(transform.position.y, topBorder, bottomBorder), transform.position.z);
+
+        
     }
 
 
@@ -187,6 +193,17 @@ public class ShipControl : MonoBehaviour {
             sm.PlaySound(4);
         }
 
+        if (coll.gameObject.CompareTag("bossBulletOrRocket"))
+        {
+            Damage(3);
+            Destroy(coll.gameObject);
+        }
+
+        if (coll.gameObject.CompareTag("enemy"))
+        {
+            Damage(3);
+            Destroy(coll.gameObject);
+        }
     }
 
     void SwitchPoint()
