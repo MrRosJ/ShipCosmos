@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class MoveCamera : MonoBehaviour {
 
-    public bool AnimationSettings = false;
+    
+    public Animation anim;
 
 
-	void Update () {
+    private void Start()
+    {
+        anim = GameObject.Find("Main Camera").GetComponent<Animation>();
+    }
+
+    void Update () {
+
 		
 	}
 }

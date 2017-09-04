@@ -19,15 +19,15 @@ public class MainMenu : MonoBehaviour {
     private GameObject ShopM;
 
     public GameObject Back;
-    public GameObject ShopPanel;
     public GameObject Console;
     public GameObject ConsolePanel;
     public GameObject QuitPanel;
     public GameObject input;
     public GameObject Button;
     public GameObject DebugInfo;
+    public MoveCamera camera;
 
-    private MoveCamera camera;
+    private bool Sound;
 
     public bool isActive = false;
 
@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour {
         ExitM = GameObject.Find("ExitImage");
         ShopM = GameObject.Find("ShopImage");
         activeConsole = GameObject.Find("Earth").GetComponent<ActivateConsole>();
-        //camera = GameObject.Find("MainCamera").GetComponent<MoveCamera>();
+        camera = GameObject.Find("Main Camera").GetComponent<MoveCamera>();
     }
 
     private void Update()
@@ -72,25 +72,26 @@ public class MainMenu : MonoBehaviour {
             console = GameObject.Find("Console").GetComponent<Console>();
     }
 
+
+    /// <summary>
+    /// Main Menu
+    /// </summary>
     public void StartGame()
     {
 
         SceneManager.LoadScene(1, LoadSceneMode.Single);
         return;
     }
-
-    public void Shop()
-    {
-
-        
-        StartM.SetActive(false);
-        ExitM.SetActive(false);
-        ShopM.SetActive(false);
-        Back.SetActive(true);
-        ShopPanel.SetActive(true);
-        
     
+    public void Shop()
+    {       
+
         return;
+    }
+
+    public void Settings()
+    {
+        camera.anim.Play("MoveCamera");
     }
 
     public void ExitGame()
@@ -99,17 +100,10 @@ public class MainMenu : MonoBehaviour {
         return;
     }
 
-    public void BackM()
-    {
-        StartM.SetActive(true);
-        ExitM.SetActive(true);
-        ShopM.SetActive(true);
-        Back.SetActive(false);
-        ShopPanel.SetActive(false);
 
-        return;
-    }
-
+    /// <summary>
+    /// Console
+    /// </summary>
     public void EnterConsole()
     {
         ConsolePanel.SetActive(false);
@@ -131,15 +125,20 @@ public class MainMenu : MonoBehaviour {
         activeConsole.isActive = false;
         activeConsole.isActiveConsole = false;
         DebugInfo.SetActive(false);
+        isActive = false;
     }
+
+    /// <summary>
+    /// Other
+    /// </summary>
 
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetInt("debugCode", 0);
     }
 
-    public void Settings()
+    public void BackP()
     {
-        //camera.AnimationSettings = true;
+        camera.anim.Play("MoveBackCamera");
     }
 }

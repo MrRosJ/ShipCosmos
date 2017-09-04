@@ -42,6 +42,11 @@ public class GameMenu : MonoBehaviour {
             DebugInfoGame.SetActive(true);
         else
             DebugInfoGame.SetActive(false);
+
+        if (PlayerPrefs.GetInt("sound", 0) == 1)
+            sound = true;
+        else
+            sound = false;
     }
 
     public void PauseM()
@@ -86,7 +91,7 @@ public class GameMenu : MonoBehaviour {
 
     public void Sound()
     {
-        if (sound)
+        if (PlayerPrefs.GetInt("sound") == 1)
         {
             AudioListener.volume = 0;
             sound = false;

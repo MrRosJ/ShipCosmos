@@ -17,11 +17,15 @@ public class GlobalScript : MonoBehaviour {
 
     public int CallBoss;
 
+    public int Sound;
+
     private void Start()
     {
         if(SceneManager.GetSceneByName("Game").ToString() == "Game")
             generate = GameObject.Find("GenerateBoss").GetComponent<GenerateBoss>();
-        
+
+        Sound = PlayerPrefs.GetInt("sound", 1);
+
     }
 
     private void Update()
